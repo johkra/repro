@@ -1,0 +1,25 @@
+[package]
+authors = ["Johannes Krampf <johannes.krampf@gmail.com>"]
+edition = "2018"
+name = "repro"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = "0.5.7"
+cortex-m-rt = "0.6.4"
+panic-abort = "0.3.1"
+
+[dependencies.stm32f103xx-hal]
+git = "https://github.com/ilya-epifanov/stm32f103xx-hal"
+branch = "i2c-support"
+features = ["rt"]
+
+[[bin]]
+name = "repro"
+test = false
+bench = false
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+lto = true # better optimizations
